@@ -32,13 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         logOut=(TextView) findViewById(R.id.logOut1);
 
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(ProfileActivity.this,PersonalActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.market.HomePageActivity;
 import com.example.market.MainActivity;
 import com.example.market.PersonalActivity;
 import com.example.market.ProfileActivity;
@@ -32,6 +33,7 @@ public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -59,17 +61,19 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Tıkla();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_profile, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
-    public void Tıkla(View view) {
-        Intent intent=new Intent(getActivity(),PersonalActivity.class);
+    public void Tıkla() {
+        Intent intent=new Intent(getActivity(), PersonalActivity.class);
         startActivity(intent);
     }
 
