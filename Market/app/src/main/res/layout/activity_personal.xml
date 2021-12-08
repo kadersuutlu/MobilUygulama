@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <EditText
+        android:id="@+id/Eposta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="E-posta"
+        android:drawableRight="@drawable/ic_baseline_person_24"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/eski_sifre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="Eski Şifre"
+        android:drawableRight="@drawable/ic_baseline_info_24"
+        android:minHeight="48dp" />
+
+
+
+    <EditText
+        android:id="@+id/yenisifre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="Yeni Şifre"
+        android:drawableRight="@drawable/ic_baseline_info_24"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/hesap_kapat"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:text="Hesabımı kapat"
+        android:textColor="#660099"
+        android:textColorHint="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/kayıt_ol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="#874B0F"
+        android:text="Güncelle"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:strokeColor="#874B0F" />
+
+
+
+</LinearLayout>

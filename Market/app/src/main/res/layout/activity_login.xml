@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+
+    <EditText
+        android:id="@+id/eMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="E-posta adresiniz "
+        android:drawableRight="@drawable/ic_baseline_email_24"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="Şifreniz"
+        android:drawableRight="@drawable/ic_baseline_lock_24"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/giris_yap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="#660099"
+        android:text="Giriş Yap"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:strokeColor="#874B0F" />
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:text="Mevcut hesabınız yok mu? Üye olun"
+        android:textColor="#660099"
+        android:textColorHint="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+</LinearLayout>

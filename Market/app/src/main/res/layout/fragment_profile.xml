@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cerceve.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingLeft="20dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+             android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="   Profilim"
+
+            android:textSize="24dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:textColor="@color/purple_500"/>
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:layout_marginTop="30dp"
+            android:text="   Adreslerim"
+            android:textSize="24dp"
+            android:textColor="@color/purple_500"
+            android:drawableLeft="@drawable/ic_baseline_home_24"
+            />
+        <TextView
+            android:id="@+id/creditCard"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:text="   Kartlarım"
+            android:layout_marginTop="30dp"
+            android:textSize="24dp"
+            android:textColor="@color/purple_500"
+            android:drawableLeft="@drawable/ic_baseline_credit_card_24"
+            />
+        <TextView
+            android:id="@+id/logOut"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="   Çıkış Yap"
+
+            android:layout_marginTop="30dp"
+            android:textSize="24dp"
+            android:textColor="@color/purple_500"
+            android:drawableLeft="@drawable/ic_baseline_exit_to_app_24"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
