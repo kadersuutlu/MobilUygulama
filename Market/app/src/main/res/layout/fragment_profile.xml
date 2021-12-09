@@ -9,55 +9,62 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="50dp"
-        android:paddingLeft="20dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:paddingLeft="20dp"
+        android:paddingTop="50dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <TextView
+        <Button
             android:id="@+id/profile"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:onClick="Tikla"
             android:text="   Profilim"
             android:textColor="@color/purple_500"
             android:textSize="24dp" />
-        <TextView
+
+        <Button
             android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-
-            android:layout_marginTop="30dp"
-            android:text="   Adreslerim"
-            android:textSize="24dp"
-            android:textColor="@color/purple_500"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
             android:drawableLeft="@drawable/ic_baseline_home_24"
-            />
-        <TextView
+            android:onClick="Address"
+            android:text="   Adreslerim"
+            android:textColor="@color/purple_500"
+            android:textSize="24dp" />
+
+        <Button
             android:id="@+id/creditCard"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-
-            android:text="   Kartlarım"
-            android:layout_marginTop="30dp"
-            android:textSize="24dp"
-            android:textColor="@color/purple_500"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
             android:drawableLeft="@drawable/ic_baseline_credit_card_24"
-            />
-        <TextView
-            android:id="@+id/logOut"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="   Çıkış Yap"
-
-            android:layout_marginTop="30dp"
-            android:textSize="24dp"
+            android:onClick="CreditCard"
+            android:text="   Kartlarım"
             android:textColor="@color/purple_500"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/logOut"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
             android:drawableLeft="@drawable/ic_baseline_exit_to_app_24"
-            />
+            android:onClick="LogOut"
+            android:text="   Çıkış Yap"
+            android:textColor="@color/purple_500"
+            android:textSize="24dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

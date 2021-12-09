@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-       //Tıkla();
+
 
     }
 
@@ -72,14 +73,10 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
-    public void Tıkla(View v) {
 
-        if(v.equals(R.id.profile)){
-            Intent intent=new Intent(getActivity(), PersonalActivity.class);
-            startActivity(intent);
-        }
 
-    }
+
+
 
 
 }

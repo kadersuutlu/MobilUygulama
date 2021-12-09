@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.market.cerceve.HomeFragment;
@@ -19,26 +20,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView profile,address,creditCard,logOut;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        /*profile=(TextView) findViewById(R.id.profile);
-        address=(TextView) findViewById(R.id.address);
-        creditCard=(TextView) findViewById(R.id.creditCard);
-        logOut=(TextView) findViewById(R.id.logOut);
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.equals(R.id.profile)){
-                    startActivity(new Intent(ProfileActivity.this,PersonalActivity.class));
-                }
-            }
-        });*/
+    button=(Button) findViewById(R.id.profile);
+
 
 
 
