@@ -19,17 +19,26 @@ import org.jetbrains.annotations.NotNull;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView profile,address,creditCard,logOut,deneme;
+    private TextView profile,address,creditCard,logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        profile=(TextView) findViewById(R.id.profile1);
-    //    address=(TextView) findViewById(R.id.address1);
-        creditCard=(TextView) findViewById(R.id.creditCard1);
-        logOut=(TextView) findViewById(R.id.logOut1);
+        /*profile=(TextView) findViewById(R.id.profile);
+        address=(TextView) findViewById(R.id.address);
+        creditCard=(TextView) findViewById(R.id.creditCard);
+        logOut=(TextView) findViewById(R.id.logOut);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.equals(R.id.profile)){
+                    startActivity(new Intent(ProfileActivity.this,PersonalActivity.class));
+                }
+            }
+        });*/
 
 
 

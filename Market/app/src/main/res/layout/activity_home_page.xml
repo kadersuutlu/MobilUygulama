@@ -17,7 +17,7 @@
         android:id="@+id/cerceve_kapsayici"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_appbar"/>
+        android:layout_above="@+id/bottom_appbar" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bottom_appbar"
