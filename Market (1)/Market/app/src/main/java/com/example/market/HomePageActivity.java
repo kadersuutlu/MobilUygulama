@@ -54,6 +54,8 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
 
     Fragment selectItem = null;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

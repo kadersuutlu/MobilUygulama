@@ -45,10 +45,12 @@ public class ProductActivity extends AppCompatActivity {
 
     EditText urunAdi;
     EditText urunFiyati;
-    Button btnImageSelect, btnImegeUpload;
+    Button btnImageSelect, btnImageUpload;
 
     public static final int PICK_IMAGE_REQUEST = 71;
     Uri kaydetmeUrisi;
+
+    String categoryID="";
 
     ActivityResultLauncher<Intent> imageActivityResultLauncher;
 
@@ -86,7 +88,7 @@ public class ProductActivity extends AppCompatActivity {
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
 
-        btn_urun_ekle = (Button) findViewById(R.id.btn_kategori_ekle);
+        btn_urun_ekle = (Button) findViewById(R.id.btn_urun_ekle);
 
         btn_urun_ekle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,14 +104,21 @@ public class ProductActivity extends AppCompatActivity {
                 btnImageSelect.setText("SEÇİLDİ");
             }
         });
+        if(getIntent()!=null){
+            Bundle bundle = getIntent().getExtras();
+            categoryID = bundle.getString("category");
+            //Toast.makeText(this, categoryID, Toast.LENGTH_SHORT).show();
+        }
 
-        kategoriYukle();
+        pullProductCount();
+
+        urunYukle();
     }
 
 
 
-    private void kategoriYukle() {
-        urunCountRef = database.getReference("Category/");
+    private void urunYukle() {
+        urunCountRef = database.getReference("Category").child(categoryID).child("Product");
         urunCountRefListener = urunCountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -117,9 +126,10 @@ public class ProductActivity extends AppCompatActivity {
                     if (snapshot.hasChildren()) {
                         liste.clear();
                         for (int listeSize = 0; listeSize < snapshot.getChildrenCount(); listeSize++) {
-                            liste.add(new Product(snapshot.child(String.valueOf(listeSize + 1)).child("name").getValue(String.class),
-                                    snapshot.child(String.valueOf(listeSize + 1)).child("image").getValue(String.class),
-                                    snapshot.child(String.valueOf(listeSize + 1)).child("price").getValue(String.class)));
+                            liste.add(new Product(snapshot.child(String.valueOf(listeSize + 1)).child("productName").getValue(String.class),
+                                    snapshot.child(String.valueOf(listeSize + 1)).child("productImage").getValue(String.class),
+                                    snapshot.child(String.valueOf(listeSize + 1)).child("productPrice").getValue(String.class),
+                                    snapshot.child(String.valueOf(listeSize+1)).child("categoryID").getValue(String.class)));
                         }
                         recyclerViewRun(liste);
 
@@ -167,9 +177,9 @@ public class ProductActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     //Kategoriyi veritabanına ekleme
                     if (yeniUrun != null) {
-                        kategoriYolu = database.getReference(("Category/" + pullProductCount()).trim());
+                        kategoriYolu = database.getReference("Category/"+categoryID+"/Product/" + String.valueOf(urunCount+1).trim());
                         kategoriYolu.setValue(yeniUrun.get(0));
-                        Toast.makeText(ProductActivity.this, yeniUrun.get(0) + " kategorisi eklendi", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductActivity.this, yeniUrun.get(0) + " ürünü eklendi", Toast.LENGTH_SHORT).show();
                     }
                     dialog.dismiss();
                 }
@@ -183,7 +193,7 @@ public class ProductActivity extends AppCompatActivity {
             });
 
             btnImageSelect = (Button) product_add.findViewById(R.id.btnSecProduct);
-            btnImegeUpload = (Button) product_add.findViewById(R.id.btnYukleProduct);
+            btnImageUpload = (Button) product_add.findViewById(R.id.btnYukleProduct);
             urunAdi = (EditText) product_add.findViewById(R.id.edtProductAdi);
             urunFiyati = (EditText) product_add.findViewById(R.id.edtProductFiyati);
 
@@ -195,7 +205,7 @@ public class ProductActivity extends AppCompatActivity {
                 }
             });
 
-            btnImegeUpload.setOnClickListener(new View.OnClickListener() {
+            btnImageUpload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     resimYukle();
@@ -231,8 +241,10 @@ public class ProductActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     //Resmi veritabanına yükleme
+                                    // Resmi veri tabanın aktarma
+
                                     yeniUrun.clear();
-                                    yeniUrun.add(new Product(urunAdi.getText().toString(), uri.toString(),urunFiyati.getText().toString()));
+                                    yeniUrun.add(new Product(urunAdi.getText().toString(), uri.toString(),urunFiyati.getText().toString(),categoryID));
                                     urunAdi.setText("");
                                     urunFiyati.setText("");
                                 }
@@ -255,8 +267,8 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
-    private int pullProductCount() {
-        urunCountRef = database.getReference("Category/").child("Product/");
+    private void pullProductCount() {
+        urunCountRef = database.getReference("Category/"+categoryID+"/Product/");
         urunCountRefListener = urunCountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -264,7 +276,11 @@ public class ProductActivity extends AppCompatActivity {
                     if (snapshot.hasChildren()) {
                         //recyclerViewRun(liste);
                          urunCount= (int) snapshot.getChildrenCount();
+                    } else {
+                        urunCount = 0;
                     }
+                } else {
+                    urunCount = 0;
                 }
             }
 
@@ -273,7 +289,6 @@ public class ProductActivity extends AppCompatActivity {
 
             }
         });
-        return urunCount + 1;
     }
 
     

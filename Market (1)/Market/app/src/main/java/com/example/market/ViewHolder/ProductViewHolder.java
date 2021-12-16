@@ -52,6 +52,7 @@ public class ProductViewHolder extends RecyclerView.Adapter<ProductViewHolder.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Picasso.with(pContext).load(listeProduct.get(position).getProductImage()).into(holder.urunResim);
         holder.urunAd.setText(listeProduct.get(position).getProductName());
+        holder.urunFiyat.setText("Ürün fiyatı : " + listeProduct.get(position).getProductPrice()+" TL");
     }
 
 

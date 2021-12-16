@@ -112,8 +112,9 @@ public class AdminPanelActivity extends AppCompatActivity {
             }
         });
 
-        kategoriYukle();
+        pullCategoryCount();
 
+        kategoriYukle();
     }
 
     private void kategoriYukle() {
@@ -125,8 +126,10 @@ public class AdminPanelActivity extends AppCompatActivity {
                     if (snapshot.hasChildren()) {
                         liste.clear();
                         for (int listeSize = 0; listeSize < snapshot.getChildrenCount(); listeSize++) {
-                            liste.add(new Category(snapshot.child(String.valueOf(listeSize + 1)).child("name").getValue(String.class),
-                                    snapshot.child(String.valueOf(listeSize + 1)).child("image").getValue(String.class)));
+                            DataSnapshot dataSnapshot = snapshot.child(String.valueOf(listeSize + 1));
+                            liste.add(new Category(dataSnapshot.getKey(),
+                                    dataSnapshot.child("name").getValue(String.class),
+                                    dataSnapshot.child("image").getValue(String.class)));
                         }
                         recyclerViewRun(liste);
 
@@ -149,14 +152,12 @@ public class AdminPanelActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerAdapter.setOnItemClickListener(new CategoryViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-
+            public void onItemClick(int position, String id) {
                 //Toast.makeText(getApplicationContext(), "Position ~> " + position, Toast.LENGTH_SHORT).show();
 
                 Intent gecis = new Intent(AdminPanelActivity.this, ProductActivity.class);
+                gecis.putExtra("category", id);
                 startActivity(gecis);
-
-
             }
         });
     }
@@ -178,11 +179,13 @@ public class AdminPanelActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Kategoriyi veritabanına ekleme
+
                 if (yeniKategori != null) {
-                    kategoriYolu = database.getReference(("Category/" + pullCategoryCount()).trim());
+                    kategoriYolu = database.getReference("Category").child(String.valueOf(categoryCount+1).trim());
                     kategoriYolu.setValue(yeniKategori.get(0));
                     Toast.makeText(AdminPanelActivity.this, yeniKategori.get(0) + " kategorisi eklendi", Toast.LENGTH_SHORT).show();
                 }
+
                 dialog.dismiss();
             }
         });
@@ -242,7 +245,7 @@ public class AdminPanelActivity extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     //Resmi veritabanına yükleme
                                     yeniKategori.clear();
-                                    yeniKategori.add(new Category(kategoriAdi.getText().toString(), uri.toString()));
+                                    yeniKategori.add(new Category(null, kategoriAdi.getText().toString(), uri.toString()));
                                     kategoriAdi.setText("");
                                 }
                             });
@@ -264,8 +267,8 @@ public class AdminPanelActivity extends AppCompatActivity {
         }
     }
 
-    private int pullCategoryCount() {
-        categoryCountRef = database.getReference("Category/");
+    private void pullCategoryCount() {
+        categoryCountRef = database.getReference("Category");
         categoryCountRefListener = categoryCountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -273,7 +276,11 @@ public class AdminPanelActivity extends AppCompatActivity {
                     if (snapshot.hasChildren()) {
                         //recyclerViewRun(liste);
                         categoryCount = (int) snapshot.getChildrenCount();
+                    } else {
+                        categoryCount = 0;
                     }
+                } else {
+                    categoryCount = 0;
                 }
             }
 
@@ -282,6 +289,5 @@ public class AdminPanelActivity extends AppCompatActivity {
 
             }
         });
-        return categoryCount + 1;
     }
 }
