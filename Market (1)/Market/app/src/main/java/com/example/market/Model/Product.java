@@ -5,15 +5,17 @@ public class Product {
     private String productImage;
     private String productPrice;
     private String categoryID;
+    private String productID;
 
     public Product() {
 
     }
-    public Product(String name, String image,String price,String id) {
+    public Product(String name, String image,String price,String id, String productID) {
         productName = name;
         productImage = image;
         productPrice = price;
         categoryID=id;
+        this.productID = productID;
     }
 
     public String getProductName() {
@@ -46,5 +48,13 @@ public class Product {
 
     public void setCategoryID(String categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 }

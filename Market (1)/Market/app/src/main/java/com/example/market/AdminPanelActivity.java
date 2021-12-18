@@ -157,6 +157,9 @@ public class AdminPanelActivity extends AppCompatActivity {
 
                 Intent gecis = new Intent(AdminPanelActivity.this, ProductActivity.class);
                 gecis.putExtra("category", id);
+                gecis.putExtra("status", "0");
+                //Status=0 admin
+                //Status=1 user
                 startActivity(gecis);
             }
         });
@@ -181,7 +184,7 @@ public class AdminPanelActivity extends AppCompatActivity {
                 //Kategoriyi veritabanına ekleme
 
                 if (yeniKategori != null) {
-                    kategoriYolu = database.getReference("Category").child(String.valueOf(categoryCount+1).trim());
+                    kategoriYolu = database.getReference("Category").child(String.valueOf(categoryCount + 1).trim());
                     kategoriYolu.setValue(yeniKategori.get(0));
                     Toast.makeText(AdminPanelActivity.this, yeniKategori.get(0) + " kategorisi eklendi", Toast.LENGTH_SHORT).show();
                 }

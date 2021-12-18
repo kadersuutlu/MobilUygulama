@@ -31,12 +31,12 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText eMail, password;
-    private TextView txt,admin;
+    private TextView txt, admin;
     private String txtEmail, txtPassword;
     private Button girisYap;
 
-    private  String parentDbName="User";
-
+    private String parentDbName = "User";
+    int intenCount = 0;
     FirebaseAuth mAuth;
 
 
@@ -48,17 +48,17 @@ public class LoginActivity extends AppCompatActivity {
 
         eMail = (EditText) findViewById(R.id.eMail);
         password = (EditText) findViewById(R.id.password);
-        txt=(TextView)findViewById(R.id.register);
-        girisYap=(Button)findViewById(R.id.giris_yap);
-        admin=(TextView)findViewById(R.id.admin);
+        txt = (TextView) findViewById(R.id.register);
+        girisYap = (Button) findViewById(R.id.giris_yap);
+        admin = (TextView) findViewById(R.id.admin);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLogin=new Intent(LoginActivity.this,AdminLoginActivity.class);
+                Intent intentLogin = new Intent(LoginActivity.this, AdminLoginActivity.class);
                 startActivity(intentLogin);
             }
         });
@@ -66,11 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLogin=new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intentLogin = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intentLogin);
             }
         });
-
 
 
         girisYap.setOnClickListener(new View.OnClickListener() {
@@ -93,11 +92,13 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 //pd.dismiss();
-
-                                                Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(intent);
-                                                finish();
+                                                if (intenCount == 0) {
+                                                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    startActivity(intent);
+                                                    finish();
+                                                    intenCount++;
+                                                }
                                             }
 
                                             @Override
