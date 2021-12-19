@@ -62,9 +62,9 @@ public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductV
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Picasso.with(pContext).load(listeProduct.get(position).getProductImage()).into(holder.urunResim);
-        holder.urunAd.setText("Ad : "+listeProduct.get(position).getProductName());
-        holder.urunFiyat.setText("Fiyat : " + listeProduct.get(position).getProductPrice()+" TL");
-        holder.urun_sayisi.setText("Adet : " + String.valueOf(listeCount.get(position)));
+        holder.urunAd.setText("Ürün Adı : "+listeProduct.get(position).getProductName());
+        holder.urunFiyat.setText("Ürün Fiyatı : " + listeProduct.get(position).getProductPrice()+" TL");
+        holder.urun_sayisi.setText("Ürün Adedi : " + String.valueOf(listeCount.get(position)));
     }
 
 

@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Market"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CreditCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProductActivity"
             android:exported="false" />
         <activity

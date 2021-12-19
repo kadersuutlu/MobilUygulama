@@ -40,7 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ProductActivity extends AppCompatActivity {
+public class
+ProductActivity extends AppCompatActivity {
 
     Button btn_urun_ekle;
     Button sepete_ekle;
@@ -155,7 +156,7 @@ public class ProductActivity extends AppCompatActivity {
        recyclerAdapter.setOnItemClickListener(new ProductViewHolder.OnItemClickListener() {
            @Override
            public void onItemClick(int position) {
-               Toast.makeText(getApplicationContext(), "Position ~> " + position, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(getApplicationContext(), "Position ~> " + position, Toast.LENGTH_SHORT).show();
 
             /*    Intent gecis = new Intent(AdminPanelActivity.this, LoginActivity.class);
                 startActivity(gecis);
@@ -165,7 +166,7 @@ public class ProductActivity extends AppCompatActivity {
 
            @Override
            public void onBasketClick(int position, String productID) {
-               Toast.makeText(ProductActivity.this, "eklendi", Toast.LENGTH_SHORT).show();
+               Toast.makeText(ProductActivity.this, "Sepete eklendi", Toast.LENGTH_SHORT).show();
                Basket.addLiveBasketListWithNotify(productID);
            }
        });

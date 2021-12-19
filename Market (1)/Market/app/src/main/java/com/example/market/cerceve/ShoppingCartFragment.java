@@ -39,6 +39,7 @@ public class ShoppingCartFragment extends Fragment {
     private BasketProductViewHolder productViewHolder;
 
     private Button sepet_onay;
+    private Button sepet_sil;
     private CardView productCard;
 
     public ShoppingCartFragment() {
@@ -52,6 +53,7 @@ public class ShoppingCartFragment extends Fragment {
 
         productCard=view.findViewById(R.id.productCard);
         sepet_onay=view.findViewById(R.id.sepet_onay);
+        sepet_sil=view.findViewById(R.id.delete_cart);
 
         recyclerView=view.findViewById(R.id.recycler_cart);
         recyclerView.setHasFixedSize(true);
@@ -59,6 +61,8 @@ public class ShoppingCartFragment extends Fragment {
 
         productCard.setVisibility(View.INVISIBLE);
         sepet_onay.setVisibility(View.INVISIBLE);
+
+
 
         //productViewHolder = new BasketProductViewHolder(mProducts, getContext());
         Basket.getLiveBasketList().observeForever(strings -> {

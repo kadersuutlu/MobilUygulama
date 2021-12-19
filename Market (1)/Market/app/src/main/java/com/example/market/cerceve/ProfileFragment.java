@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.market.AddressActivity;
 import com.example.market.CartActivity;
+import com.example.market.CreditCardActivity;
 import com.example.market.LoginActivity;
 import com.example.market.PersonalActivity;
 import com.example.market.ProfileActivity;
@@ -36,12 +38,12 @@ public class ProfileFragment extends Fragment {
     }
 
     public void Address(View v) {
-        Intent intent = new Intent(getActivity(), PersonalActivity.class);
+        Intent intent = new Intent(getActivity(), AddressActivity.class);
         startActivity(intent);
     }
 
     public void CreditCard(View v) {
-        Intent intent = new Intent(getActivity(), CartActivity.class);
+        Intent intent = new Intent(getActivity(), CreditCardActivity.class);
         startActivity(intent);
     }
 
