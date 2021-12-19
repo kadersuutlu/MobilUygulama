@@ -1,6 +1,7 @@
 package com.example.market.ViewHolder;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +21,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductViewHolder.ViewHolder>{
+public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductViewHolder.ViewHolder> {
 
     private List<Product> listeProduct;
     private List<Integer> listeCount;
     private Context pContext;
-    private BasketProductViewHolder.OnItemClickListener pListener;
+    private BasketProductViewHolder.OnItemClickListener mListener;
 
     private FirebaseUser firebaseProduct;
 
@@ -38,13 +40,13 @@ public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductV
         this.pContext = pContext;
     }
 
-
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onRemoveClick(int position, String productID);
     }
 
     public void setOnItemClickListener(BasketProductViewHolder.OnItemClickListener listener) {
-        this.pListener = listener;
+        this.mListener = listener;
     }
 
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -55,15 +57,16 @@ public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductV
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_satiri, parent, false);
-        return new ViewHolder(itemView, pListener);
+        return new ViewHolder(itemView, mListener);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Picasso.with(pContext).load(listeProduct.get(position).getProductImage()).into(holder.urunResim);
-        holder.urunAd.setText("Ürün Adı : "+listeProduct.get(position).getProductName());
-        holder.urunFiyat.setText("Ürün Fiyatı : " + listeProduct.get(position).getProductPrice()+" TL");
+        holder.deleteCart.setBackgroundResource(R.drawable.remove_basket);
+        holder.urunAd.setText("Ürün Adı : " + listeProduct.get(position).getProductName());
+        holder.urunFiyat.setText("Ürün Fiyatı : " + listeProduct.get(position).getProductPrice() + " TL");
         holder.urun_sayisi.setText("Ürün Adedi : " + String.valueOf(listeCount.get(position)));
     }
 
@@ -75,6 +78,7 @@ public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductV
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView urunResim;
+        public ImageView deleteCart;
         public TextView urun_sayisi;
         public TextView urunAd;
         public TextView urunFiyat;
@@ -82,6 +86,7 @@ public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductV
         public ViewHolder(@NonNull View itemView, OnItemClickListener mListener) {
             super(itemView);
             this.urunResim = itemView.findViewById(R.id.urun_image);
+            this.deleteCart = itemView.findViewById(R.id.delete_cart);
             this.urunAd = itemView.findViewById(R.id.urun_ad);
             this.urunFiyat = itemView.findViewById(R.id.urun_fiyat);
             this.urun_sayisi = itemView.findViewById(R.id.urun_sayisi);
@@ -89,14 +94,34 @@ public class BasketProductViewHolder extends RecyclerView.Adapter<BasketProductV
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (pListener != null) {
+                    if (mListener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            pListener.onItemClick(position);
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+
+            deleteCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            mListener.onRemoveClick(position, listeProduct.get(position).getProductID());
                         }
                     }
                 }
             });
         }
+
     }
+
+    public void setCacheMenuRes(List<Product> dataList, List<Integer> listeCountt) {
+        this.listeProduct = dataList;
+        this.listeCount = listeCountt;
+        notifyDataSetChanged();
+    }
+
 }

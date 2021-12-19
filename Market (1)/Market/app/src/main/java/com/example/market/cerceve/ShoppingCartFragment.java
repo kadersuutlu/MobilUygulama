@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,8 @@ public class ShoppingCartFragment extends Fragment {
 
     private List<Product> listeProduct;
     private List<Integer> listeCount;
+    List<Product> listeProductY = new ArrayList<>();
+    List<Integer> listeCountY = new ArrayList<>();
     private RecyclerView recyclerView;
     private BasketProductViewHolder productViewHolder;
 
@@ -49,13 +52,13 @@ public class ShoppingCartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
 
-        productCard=view.findViewById(R.id.productCard);
-        sepet_onay=view.findViewById(R.id.sepet_onay);
-        sepet_sil=view.findViewById(R.id.delete_cart);
+        productCard = view.findViewById(R.id.productCard);
+        sepet_onay = view.findViewById(R.id.sepet_onay);
+        sepet_sil = view.findViewById(R.id.delete_cart);
 
-        recyclerView=view.findViewById(R.id.recycler_cart);
+        recyclerView = view.findViewById(R.id.recycler_cart);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -63,12 +66,11 @@ public class ShoppingCartFragment extends Fragment {
         sepet_onay.setVisibility(View.INVISIBLE);
 
 
-
         //productViewHolder = new BasketProductViewHolder(mProducts, getContext());
         Basket.getLiveBasketList().observeForever(strings -> {
             //Toast.makeText(requireActivity(), strings.toString(), Toast.LENGTH_SHORT).show();
 
-            if(strings.isEmpty()){
+            if (strings.isEmpty()) {
                 productCard.setVisibility(View.INVISIBLE);
                 sepet_onay.setVisibility(View.INVISIBLE);
             } else {
@@ -85,17 +87,29 @@ public class ShoppingCartFragment extends Fragment {
                             listeProduct = new ArrayList<>();
                             listeCount = new ArrayList<>();
 
-                            for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                                if(strings.contains(dataSnapshot.getKey())){
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                if (strings.contains(dataSnapshot.getKey())) {
 
-                                    Product product=dataSnapshot.getValue(Product.class);
+                                    Product product = dataSnapshot.getValue(Product.class);
                                     listeProduct.add(product);
                                     listeCount.add(Collections.frequency(strings, dataSnapshot.getKey()));
                                 }
                             }
-
                             productViewHolder = new BasketProductViewHolder(listeProduct, listeCount, getContext());
                             recyclerView.setAdapter(productViewHolder);
+                            productViewHolder.setOnItemClickListener(new BasketProductViewHolder.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+
+                                }
+
+                                @Override
+                                public void onRemoveClick(int position, String productID) {
+                                    Basket.removeLiveBasketListWithNotify(String.valueOf(Integer.parseInt(listeProduct.get(position).getProductID())));
+                                    productViewHolder.setCacheMenuRes(listeProduct, listeCount);
+                                }
+
+                            });
                         }
                     }
                 }
@@ -107,8 +121,9 @@ public class ShoppingCartFragment extends Fragment {
             });
         });
 
-        productViewHolder = new BasketProductViewHolder(new ArrayList<>(), new ArrayList<>(), getContext());
-        recyclerView.setAdapter(productViewHolder);
+        //productViewHolder = new BasketProductViewHolder(new ArrayList<>(), new ArrayList<>(), getContext());
+        //recyclerView.setAdapter(productViewHolder);
+
 
         return view;
     }

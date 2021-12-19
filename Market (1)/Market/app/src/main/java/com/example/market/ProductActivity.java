@@ -153,23 +153,23 @@ ProductActivity extends AppCompatActivity {
         recyclerAdapter = new ProductViewHolder(liste, this);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-       recyclerAdapter.setOnItemClickListener(new ProductViewHolder.OnItemClickListener() {
-           @Override
-           public void onItemClick(int position) {
-               //Toast.makeText(getApplicationContext(), "Position ~> " + position, Toast.LENGTH_SHORT).show();
+        recyclerAdapter.setOnItemClickListener(new ProductViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //Toast.makeText(getApplicationContext(), "Position ~> " + position, Toast.LENGTH_SHORT).show();
 
             /*    Intent gecis = new Intent(AdminPanelActivity.this, LoginActivity.class);
                 startActivity(gecis);
 
              */
-           }
+            }
 
-           @Override
-           public void onBasketClick(int position, String productID) {
-               Toast.makeText(ProductActivity.this, "Sepete eklendi", Toast.LENGTH_SHORT).show();
-               Basket.addLiveBasketListWithNotify(productID);
-           }
-       });
+            @Override
+            public void onBasketClick(int position, String productID) {
+                Toast.makeText(ProductActivity.this, "Sepete eklendi", Toast.LENGTH_SHORT).show();
+                Basket.addLiveBasketListWithNotify(productID);
+            }
+        });
     }
 
     private void urunEklePenceresiGoster() {
@@ -256,7 +256,7 @@ ProductActivity extends AppCompatActivity {
                                     // Resmi veri tabanın aktarma
 
                                     yeniUrun.clear();
-                                    yeniUrun.add(new Product(urunAdi.getText().toString(), uri.toString(), urunFiyati.getText().toString(), categoryID, String.valueOf(urunCount+1) ));
+                                    yeniUrun.add(new Product(urunAdi.getText().toString(), uri.toString(), urunFiyati.getText().toString(), categoryID, String.valueOf(urunCount + 1)));
                                     urunAdi.setText("");
                                     urunFiyati.setText("");
                                 }

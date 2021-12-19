@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private String parentDbName = "User";
     int intenCount = 0;
     FirebaseAuth mAuth;
-
+    private FirebaseUser currentUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,29 @@ public class LoginActivity extends AppCompatActivity {
         admin = (TextView) findViewById(R.id.admin);
 
         mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
+        if (!(currentUser == null)) {
+            currentUser.reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(LoginActivity.this, "Succesfully Logged In", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
+            currentUser.reload().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    if (e instanceof FirebaseAuthInvalidUserException) {
+                        Log.d("MainActivity", "user doesn't exist anymore");
+
+                    }
+                }
+            });
+        }
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

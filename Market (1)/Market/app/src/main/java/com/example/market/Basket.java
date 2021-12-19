@@ -19,6 +19,9 @@ public class Basket {
 
     public static void addBasketList(String item) {
         Basket.basketList.add(item);
+
+    } public static void removeBasketList(String item) {
+        Basket.basketList.remove(item);
     }
 
     public static MutableLiveData<List<String>> getLiveBasketList() {
@@ -31,7 +34,7 @@ public class Basket {
     }
 
     public static void addLiveBasketList(String item) {
-        if(Basket.liveBasketList.getValue() != null){
+        if (Basket.liveBasketList.getValue() != null) {
             Basket.liveBasketList.getValue().add(item);
             addBasketList(item);
         }
@@ -39,6 +42,11 @@ public class Basket {
 
     public static void addLiveBasketListWithNotify(String item) {//WithNotify
         addBasketList(item);
+        Basket.liveBasketList.setValue(new ArrayList<>(getBasketList()));
+    }
+
+    public static void removeLiveBasketListWithNotify(String item) {//WithNotify
+        removeBasketList(item);
         Basket.liveBasketList.setValue(new ArrayList<>(getBasketList()));
     }
 }
