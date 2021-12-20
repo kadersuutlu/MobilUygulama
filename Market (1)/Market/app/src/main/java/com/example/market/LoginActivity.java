@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,8 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText eMail, password;
-    private TextView txt, admin;
+    private TextView txt;
+    private ImageView admin;
     private String txtEmail, txtPassword;
     private Button girisYap;
 
@@ -52,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         txt = (TextView) findViewById(R.id.register);
         girisYap = (Button) findViewById(R.id.giris_yap);
-        admin = (TextView) findViewById(R.id.admin);
+        admin = (ImageView) findViewById(R.id.admin);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
