@@ -109,6 +109,10 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         profileFragment.LogOut(v);
     }
 
+    public void SepetOnay(View v) {
+        profileFragment.LogOut(v);
+    }
+
 
     @Override
     protected void attachBaseContext(Context base) {

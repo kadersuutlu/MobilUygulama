@@ -1,5 +1,6 @@
 package com.example.market.cerceve;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.market.Basket;
 import com.example.market.Model.Product;
+import com.example.market.OrderActivity;
+import com.example.market.ProfileActivity;
 import com.example.market.R;
 import com.example.market.ViewHolder.BasketProductViewHolder;
 import com.example.market.ViewHolder.ProductViewHolder;
@@ -66,6 +69,7 @@ public class ShoppingCartFragment extends Fragment {
         sepet_onay.setVisibility(View.INVISIBLE);
 
 
+
         //productViewHolder = new BasketProductViewHolder(mProducts, getContext());
         Basket.getLiveBasketList().observeForever(strings -> {
             //Toast.makeText(requireActivity(), strings.toString(), Toast.LENGTH_SHORT).show();
@@ -76,6 +80,16 @@ public class ShoppingCartFragment extends Fragment {
             } else {
                 productCard.setVisibility(View.VISIBLE);
                 sepet_onay.setVisibility(View.VISIBLE);
+                sepet_onay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                            Intent intent = new Intent(getActivity(), OrderActivity.class);
+                            startActivity(intent);
+
+
+                    }
+                });
             }
 
             ValueEventListener urunCountRefListener = FirebaseDatabase.getInstance().getReference("Product").addValueEventListener(new ValueEventListener() {
