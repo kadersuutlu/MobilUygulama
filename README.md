@@ -1,4 +1,4 @@
-# MobilUygulama
+# Mobil Uygulama Geliştirme Dersi Bitirme Projesi
 ![1](https://user-images.githubusercontent.com/80063396/180759795-8f20e29d-30ac-4c36-8cbc-6e905008de3d.jpg)
 ![2](https://user-images.githubusercontent.com/80063396/180759809-8ef784a6-0443-42bd-8342-bf3ebbf6f0c7.jpg)
 ![3](https://user-images.githubusercontent.com/80063396/180759813-cee2bc2f-003e-4836-a38f-6713d0c9879e.jpg)
